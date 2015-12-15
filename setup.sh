@@ -2,6 +2,7 @@
 
 # Set up soft links to configs
 ln -s ~/dotfiles/.vimrc ~/.vimrc
+ln -s ~/dotfiles/.screenrc ~/.screenrc
 
 # Vim - install Vundle
 if [ ! -d ~/.vim/bundle/Vundle.vim ]
