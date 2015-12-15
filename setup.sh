@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# ===============================================================
+# File:                 $HOME/dotfiles/setup.sh
+# Purpose:              Idempotent Setup file for various dot files (config files)
+# Compiled by:          David Lieu
+# Latest update:        December 14, 2015
+# ===============================================================
 
 # Set up soft links to configs
 ln -s ~/dotfiles/.vimrc ~/.vimrc
