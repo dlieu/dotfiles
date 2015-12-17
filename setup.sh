@@ -6,6 +6,11 @@
 # Latest update:        December 14, 2015
 # ===============================================================
 
+# Backup existing dot files
+mkdir -p ~/docs/backup
+mv ~/.vimrc ~/docs/backup/.vimrc_$(date +%y%m%d)
+mv ~/.screenrc ~/docs/backup/.screenrc_$(date +%y%m%d)
+
 # Set up soft links to configs
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 ln -s ~/dotfiles/.screenrc ~/.screenrc
