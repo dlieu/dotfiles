@@ -48,7 +48,7 @@ set history=500		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-
+set nu!			" show line numbers
 
 
 " Switch syntax highlighting on, when the terminal has colors
