@@ -50,6 +50,10 @@ set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set nu!			" show line numbers
 
+set expandtab		" Old setting from mxn, probably for python to use spaces instead of tabs
+set tabstop=4		" Same as above^^
+set shiftwidth=4	" ^^
+
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
