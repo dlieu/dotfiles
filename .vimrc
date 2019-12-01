@@ -67,3 +67,5 @@ endif
 " Tagbar Mapping
 nmap <F8> :TagbarToggle<CR>
 
+" Color scheme.
+color desert
