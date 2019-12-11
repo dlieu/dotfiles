@@ -2,6 +2,95 @@
 # File:                 $HOME/.screenrc
 # Purpose:              Setup file for program "(GNU) screen"
 # Compiled by:          David Lieu
+# ===============================================================
+# 
+# Change Log:
+#     May 17, 2019 - Fixed mouse scrolling in screen session, organized a bit
+#     March 1 2018 - Document the status string more.  
+#                    Add a line for the screenrc_quiet - good for not updating seconds and monitoring activity on Konsole terminal
+#     2015 - Initial Version
+
+### Create the status line pinned at the bottom.
+##########
+hardstatus alwayslastline
+hardstatus string "%{b kg}%H %{r}%1` %{w}| %{y}%Y-%m-%d %{y}%c:%s %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+# host | time | date | windows
+# Document hardstatus string
+#       %{b kg}%H %{r}%1` -  host.. no clue on exact breakdown
+#       %{w}|             -  white font pipe |
+#       %{y}%Y-%m-%d      -  in yellow font Year-month-date  eg 2018-03-01
+#       %{y}%c:%s         -  yellow font minutes seconds? 
+#       %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<     -  windows... no clue on exact breakdown..
+#quiet status line - no minutes or seconds
+##hardstatus string "%{b kg}%H %{r}%1` %{w}| %{y}%Y-%m-%d %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+
+#Old stuff
+###        #Customize bottom bar of screen session
+###        #hardstatus alwayslastline
+###        #hardstatus string "%{b kw}%H %{r}%1` %{w}| %{g}%c %{w}| %{y}%Y.%m.%d %{w}| %{-b kw}%u %-Lw%{= rW}%50> %n%f %t %{-}%+Lw%<"
+###        #hardstatus alwayslastline '%{= G}[ %{G}%H %{g}][%= %{= w}%?%-Lw%?%{= R}%n*%f %t%?%{= R}(%u)%?%{= w}%+Lw%?%= %{= g}][ %{y}Load: %l %{g}][%{B}%Y-%m-%d %{W}%c:%s %{g}]'
+###        #host | time | date |load average| obligatory window
+#hardstatus off
+##########
+
+### Enable screen scrolling.
+##########
+# is-there-a-way-to-make-screen-scroll-like-a-normal-terminal
+#        https://unix.stackexchange.com/questions/43229/
+termcapinfo xterm*|rxvt*|kterm*|Eterm* ti@:te@
+termcapinfo xterm*|rxvt*|kterm*|Eterm* 'hs:ts=\E]2;:fs=07:ds=\E]2;screen07'
+##########
+
+
+# ===============================================================
+# VARIABLES - Strings
+# ===============================================================
+# COLOR TABLE
+# ===============================================================
+# 0 Black             .    leave color unchanged
+# 1 Red               b    blue
+# 2 Green             c    cyan
+# 3 Brown / yellow    d    default color
+# 4 Blue              g    green           b    bold
+# 5 Purple            k    blacK           B    blinking
+# 6 Cyan              m    magenta         d    dim
+# 7 White             r    red             r    reverse
+# 8 unused/illegal    w    white           s    standout
+# 9 transparent       y    yellow          u    underline
+# ===============================================================
+# Messages
+# ===============================================================
+# There are two kinds of messages:  "activity" and "bell"
+# They are also the names of the commands that set the
+# respective messages.  In every message there can be "meta
+# strings" which are replaced by values.  A meta string starts
+# with a percent sign and is then followed by one of the
+# following letters: aAdDmMnstwWyY The meta strings refer to
+# the current date and time or to a window title or number:
+#   %t - title
+#   %n - number (a single % still works)
+#   %d - day
+#   %D - weekday name
+#   %m - month
+#   %M - month name
+#   %y - year (2 digit)
+#   %Y - year (4 digit)
+#   %w - hour:minutes (24h format)
+#   %W - hour:minutes (12h format)
+#   %s - seconds
+#   %a - am/pm
+#   %A - AM/PM
+# Older versions of screen used a single '%' character
+# for window titles - but since version 3.7 this is
+# obsoleted by '%n' and will vanish in future releases!
+# So please update your screenrc to meet this convention!
+#
+# ===============================================================
+# "~" stands for the "bell" character
+# ===============================================================
+# File:                 $HOME/.screenrc
+# Purpose:              Setup file for program "(GNU) screen"
+# Compiled by:          David Lieu
 # Latest update:        May 29, 2015
 # ===============================================================
 #hardstatus off
