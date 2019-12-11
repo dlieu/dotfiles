@@ -32,12 +32,7 @@ NC='\033[0m' # No Color
 
 
 
-
-
-# ansiblev  - ansible environment
-alias ansiblev='source ~/main/virtualenv/ansible3/bin/activate'
-alias av=ansiblev
-alias ansv=ansiblev
+alias venv='source ~/main/virtualenv/myvenv/bin/activate'
 
 
 
