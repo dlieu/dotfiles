@@ -10,6 +10,7 @@
 ###
 echo "Backup existing dot files (if required)..."
 mkdir -p ~/archive/dotfiles
+mkdir -p ~/.config/nvim/
 
 # Backup vimrc
 if [ -L $HOME/.vimrc ] && [ "$(readlink $HOME/.vimrc)" = "$HOME/main/workspace/dotfiles/.vimrc" ];
