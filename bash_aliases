@@ -62,6 +62,8 @@ printqueryoneline() {
 }
 alias printq='printqueryoneline '
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 ####################################
 ### Common Commands
