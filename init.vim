@@ -31,6 +31,9 @@ set expandtab		" Old setting from mxn, probably for python to use spaces instead
 set tabstop=4		" Same as above^^
 set shiftwidth=4	" ^^
 
+" true color
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 
 " Color scheme.
 color desert
