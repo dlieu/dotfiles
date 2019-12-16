@@ -1,0 +1,148 @@
+--  """
+--  ===============================================================
+--  File:                 psqlrc
+--  Purpose:              Postgres config
+--  Compiled by:          DL
+--  ===============================================================
+--  
+--  Info:
+--      xxx
+--  
+--  Usage:
+--      For PER SESSION usage.
+--      create an PER SESSION alias.
+--  
+--          alias pd='PSQLRC=~/dlieu/psqlrc psql office'
+--  
+--      start postgres with 'pd'
+--  
+--          $ pd
+--          =====turtlemagic activated======
+--          psql (9.6.10)
+--          Type "help" for help.
+--          office=# 
+--  
+--  Change Log:
+--      May 7, 2019   - Add help string. and other shortcuts.
+--      April 9, 2019 - Initial Version
+--  """
+\set QUIET 1
+
+--- how-to-use-variables-in-a-psql-script -->  https://stackoverflow.com/a/18673338
+
+--- help commands
+select '''Help Command..
+:h.......................show help
+:c.......................select count(1)
+:s.......................select * from
+
+:ssp.....................set search path
+
+:b.......................boiler plate select limit 1
+:b1......................boiler plate select limit 1
+:bw......................boiler plate select * where
+:bg......................boiler plate select x, group by 1
+
+:1.......................limit 1;
+:2.......................limit 2;
+:3.......................limit 3;
+:4.......................limit 4;
+:5.......................limit 5;
+:10......................limit 10;
+''' helpstring \gset
+\set h '\\echo :helpstring'
+\set help '\\echo :helpstring'
+\set halp '\\echo :helpstring'
+
+
+
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+--- xxxx  turtle shortcuts
+--- xxxx  eg.  :c public.table
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+---      (c)ount from table
+\set c 'select count(1) from '
+
+---      (s)elect from table
+\set s 'select * from '
+
+---      (s)et (s)earch (p)ath
+\set ssp 'set search_path='
+
+
+---      limit shortcuts
+\set 1 ' limit 1;'
+\set 2 ' limit 2;'
+\set 3 ' limit 3;'
+\set 4 ' limit 4;'
+\set 5 ' limit 5;'
+\set 10 ' limit 10;'
+
+
+---      (b)oiler plate select 1
+\set b 'SELECT * FROM foobar LIMIT 1;\\e'
+
+---      (b)oiler plate select (1)
+\set b1 'SELECT * FROM foobar LIMIT 1;\\e'
+
+---      (b)oiler plate select * from (w)here
+\set bw 'SELECT * FROM foobar WHERE xyz = xyz LIMIT 1;\\e'
+
+---      (b)oiler plate select (g)roup by
+\set bg 'SELECT xyz, COUNT(1) FROM foobar GROUP BY 1;\\e'
+
+
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+--- xxxx  /END turtle shortcuts
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+--- xxxx  misc/display settings
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+-- By default, NULL displays as an empty space. Is it actually an empty
+-- string, or is it null? This makes that distinction visible.
+---\pset null 'NULL'
+\pset null ¤
+
+-- Use table format (with headers across the top) by default, but switch to
+-- expanded table format when there's a lot of data, which makes it much
+-- easier to read.
+\x auto
+
+-- Autocomplete keywords (like SELECT) in upper-case, even if you started
+-- typing them in lower case.
+\set COMP_KEYWORD_CASE upper
+
+--- PROMPT stuff..  https://thoughtbot.com/blog/improving-the-command-line-postgres-experience#changing-the-prompt
+--      %[..%] prompt sets color to bold black
+--      %M full host name or local 
+--      %R normally '=', but '^' if in single line mode, and '!' if disconnected.
+--      %[..%] final at the end resets color to non-bold
+--      %# if '#' if youre a super user, otherwise '>'
+--      \set PROMPT1 '%[%033[1m%]psql%R%[%033[0m%]%# '
+--      %[%033[1;32m%]<XXX>%[%033[0m%]   -  change the 32m to any number between 31-37 for color
+--      \set PROMPT1 '%[%033[1;32m%]%M%R%[%033[0m%]%# '
+\set PROMPT1 '%[%033[1m%]%M%R%[%033[0m%]%# '
+
+---\set PROMPT2 '[more] %R > '
+\set PROMPT2 ' %R%# '
+
+
+----\set today date(now())
+---\timing
+
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+--- xxxx  /END misc/display settings
+--- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+
+
+\set QUIET 0
+
+\echo '=====turtlemagic activated======'
+
+

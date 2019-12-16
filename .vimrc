@@ -24,8 +24,21 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Vundle - Plugins go here
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'majutsushi/tagbar'
+
+" add all your plugins here (note older versions of Vundle
+" used Bundle instead of Plugin)
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tmhedberg/SimpylFold'
+Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'nvie/vim-flake8'
+Plugin 'jnurmine/Zenburn'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'vimwiki/vimwiki'
 
 call vundle#end()            " required
 filetype plugin indent on    " required vundle
@@ -41,7 +54,35 @@ filetype plugin indent on    " required vundle
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" See docstrings for folded code
+let g:SimpylFold_docstring_preview=1
+
+" encoding
+set encoding=utf-8
+
+" autocomplete. 
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" highlight
+let python_highlight_all=1
+syntax on
+
+"ignore pyc
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 " Various settings from an example vimrc
 set history=500		" keep 50 lines of command line history
