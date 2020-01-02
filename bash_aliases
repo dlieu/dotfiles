@@ -75,21 +75,39 @@ export EDITOR="$VISUAL"
 # Screenshot: http://img194.imageshack.us/img194/2154/twolineprompt.png
 # Michal Kottman, 2012
  
+
 RESET="\[\033[0m\]"
 RED="\[\033[0;31m\]"
 GREEN="\[\033[01;32m\]"
 BLUE="\[\033[01;34m\]"
 YELLOW="\[\033[0;33m\]"
- 
-PS_LINE=`printf -- '- %.0s' {1..200}`
+
+#LINE_DASHES_FILLER=`printf -- '- %.0s' {1..200}`
+EMPTY_SPACE_FILLER=`printf -- '  %.0s' {1..200}`
+PS_LINE=$EMPTY_SPACE_FILLER
+
+function get_cached_bzr_tags {
+  TMP="$(grep $(pwd) /home/dl/tmp/bzrtags.txt)"
+  if [ -z "$TMP" ]
+  then
+  TMP="$(pwd) $(get_latest_bzr_tag)"
+  echo $TMP >> /home/dl/tmp/bzrtags.txt
+    echo $TMP | awk '{print $2}'
+  else
+    echo $TMP | awk '{print $2}'
+  fi
+}
+function get_latest_bzr_tag {
+  bzr tags --sort=time | tail -n1 | cut -d ' ' -f1
+}
 function parse_git_branch {
   PS_BRANCH=''
   PS_FILL=${PS_LINE:0:$COLUMNS}
   if [ -d .svn ]; then
     PS_BRANCH="(svn r$(svn info|awk '/Revision/{print $2}'))"
     return
-  elif [ -f _FOSSIL_ -o -f .fslckout ]; then
-    PS_BRANCH="(fossil $(fossil status|awk '/tags/{print $2}')) "
+  elif [ -d ".bzr/branch" ]; then
+    PS_BRANCH="($(get_cached_bzr_tags) r$(bzr revno)) "
     return
   fi
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -99,8 +117,8 @@ PROMPT_COMMAND=parse_git_branch
 PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
 PS_GIT="$YELLOW\$PS_BRANCH"
 PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
+#export PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}${RESET}\$ "
 export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
-
 ##
 ####################################
 ### Common Commands
