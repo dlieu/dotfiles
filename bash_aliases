@@ -231,8 +231,11 @@ alias taw='taskpriorityaddnowait '
 
 
 #git commit/push
-alias push='git status; \
-git add . ;\
-git commit -m "$1" ;\
-git push ;
-'
+gitcommitpush() {
+    echo "git add.; git commit -m '$1'; git push"
+    git status
+    git add .
+    git commit -m "$1"
+    git push
+}
+alias push='gitcommitpush '
