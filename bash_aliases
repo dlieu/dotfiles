@@ -93,7 +93,7 @@ function parse_git_branch {
     return
   fi
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  PS_BRANCH="(git ${ref#refs/heads/}) "
+  PS_BRANCH="(${ref#refs/heads/}) "
 }
 PROMPT_COMMAND=parse_git_branch
 PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
