@@ -19,6 +19,7 @@
 # ZZ005Z.....................Program Aliases
 # ZZ006Z.....................ANSIBLE PLAYBOOKS
 # ZZ007Z.....................taskwarrior
+# ZZ008Z.....................GIT (version control)
 
 ####################################
 ### not organized..
@@ -222,3 +223,16 @@ alias ta='taskpriorityadd '
 alias to='task overdue priority:H'
 #(t)ask priority (a)dd, no (w)ait
 alias taw='taskpriorityaddnowait '
+
+
+####################################
+### GIT (version control)
+####ZZ008Z##########################
+
+
+#git commit/push
+alias push='git status; \
+git add . ;\
+git commit -m "$1" ;\
+git push ;
+'
