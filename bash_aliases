@@ -111,14 +111,21 @@ function parse_git_branch {
     return
   fi
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  PS_BRANCH="(${ref#refs/heads/}) "
+  PS_UPSTREAM=$(git rev-parse --abbrev-ref ${ref#refs/heads/}@{u})
+  PS_BRANCH="(${ref#refs/heads/}) [$PS_UPSTREAM]"
 }
+function refresh_bzr_tags {
+  sed -i "\:$(pwd):d" /home/dl/tmp/bzrtags.txt
+  get_cached_bzr_tags
+}
+
 PROMPT_COMMAND=parse_git_branch
 PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
 PS_GIT="$YELLOW\$PS_BRANCH"
 PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
 #export PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}${RESET}\$ "
-export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+#export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+export PS1="${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 ##
 ####################################
 ### Common Commands
