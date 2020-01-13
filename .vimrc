@@ -24,11 +24,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " Vundle - Plugins go here
-" Plugin 'ctrlpvim/ctrlp.vim'
 " Plugin 'majutsushi/tagbar'
 
 " add all your plugins here (note older versions of Vundle
 " used Bundle instead of Plugin)
+" YouCompleteMe is autocompleter.  requires pre-install before working
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'vim-scripts/indentpython.vim'
@@ -39,6 +39,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'vimwiki/vimwiki'
+Plugin 'plugin/taglist.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required vundle
@@ -107,8 +108,17 @@ endif
 " map leader key
 let mapleader = " "
 
-" Tagbar Mapping
-nmap <F8> :TagbarToggle<CR>
+" use F6 to toggle nerd tree
+nmap <F6> :NERDTreeToggle<CR>
+
+" Taglist configs
+" nmap <F8> :TlistToggle<CR>
+nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Show_One_file = 1
+let Tlist_Compact_Format = 1
+" let Tlist_Close_On_Select= 1
+
 
 " Color scheme.
 color desert
