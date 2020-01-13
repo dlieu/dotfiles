@@ -100,6 +100,11 @@ function get_cached_bzr_tags {
 function get_latest_bzr_tag {
   bzr tags --sort=time | tail -n1 | cut -d ' ' -f1
 }
+function get_latest_git_tag {
+  # eg. git describe --tag -> v8.0.6-60-g88effa665 
+  # returns v8.0.6
+  git describe --tags 2> /dev/null | cut -d '-' -f1
+}
 function parse_git_branch {
   PS_BRANCH=''
   PS_FILL=${PS_LINE:0:$COLUMNS}
@@ -112,7 +117,8 @@ function parse_git_branch {
   fi
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
   PS_UPSTREAM=$(git rev-parse --abbrev-ref ${ref#refs/heads/}@{u})
-  PS_BRANCH="(${ref#refs/heads/}) [$PS_UPSTREAM]"
+  PS_TAG=$(get_latest_git_tag)
+  PS_BRANCH="(${ref#refs/heads/} $PS_TAG) [$PS_UPSTREAM]"
 }
 function refresh_bzr_tags {
   sed -i "\:$(pwd):d" /home/dl/tmp/bzrtags.txt
