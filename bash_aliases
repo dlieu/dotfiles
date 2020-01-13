@@ -270,3 +270,7 @@ gitcommitpush() {
     git push
 }
 alias push='gitcommitpush '
+
+
+# pull ff only
+alias pull='echo "git pull --ff-only"; git pull --ff-only'
