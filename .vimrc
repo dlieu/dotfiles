@@ -104,6 +104,8 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 
+" map leader key
+let mapleader = " "
 
 " Tagbar Mapping
 nmap <F8> :TagbarToggle<CR>
