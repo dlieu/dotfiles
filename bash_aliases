@@ -133,6 +133,11 @@ PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
 #export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 export PS1="${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 ##
+
+# change it to vim mode.
+# https://apple.stackexchange.com/questions/88515/how-do-i-edit-current-shell-command-in-vi
+set -o vi
+# set -o emacs
 ####################################
 ### Common Commands
 ###ZZ001Z############################
