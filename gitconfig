@@ -1,0 +1,19 @@
+[user]
+	email = 
+	name = dl
+[init]
+	templatedir = ~/.git_template
+[alias]
+	# override default log. Fancier log, one line per commit
+	log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+    # ctags - manually generate tags
+	ctags = !.git/hooks/ctags
+
+	# undo last commit
+	#       https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
+	undo = reset --soft HEAD^
+[core]
+	excludesfile = /home/dl/.gitignore
+
+

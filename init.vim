@@ -21,7 +21,12 @@ Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
 Plug 'jnurmine/Zenburn'
 Plug 'scrooloose/nerdtree'
-
+" Commentary - Toggle comments
+Plug 'tpope/vim-commentary'
+" Fuzzy Finder (fzf). #requires seperate install.
+Plug '~/.fzf'
+" Fuzzy Finder vim support
+Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -54,7 +59,7 @@ set history=500		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-set nu!			" show line numbers
+set number			" show line numbers
 
 set expandtab		" Old setting from mxn, probably for python to use spaces instead of tabs
 set tabstop=4		" Same as above^^
@@ -91,22 +96,40 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 " map leader key
 let mapleader = " "
 
-" Quicky (ev) edit vimrc or (sv) source
+" leader sv or ev -  edit vimrc or source
 nnoremap <leader>ev :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
-" window split navigations. Ctrl+W, {J,K,L,H}
+" Ctrl+{J,K,L,H} - window split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" Enable folding with the spacebar
-nnoremap <space> za
 
-" use F6 to toggle NERDTree
+" xxspacebar - Enable folding 
+" nnoremap <space> za
+
+" Shift+<UP>/<DOWN>  -  move lines up or down, like sublime.
+nnoremap <S-Up> :m-2<CR>
+nnoremap <S-Down> :m+<CR>
+inoremap <S-Up> <Esc>:m-2<CR>
+inoremap <S-Down> <Esc>:m+<CR>
+
+" Ctrl+P - Fuzzy Finder :Files
+nnoremap <C-P> :Files<CR>
+" Ctrl+K - Fuzzy Finder :Buffers
+nnoremap <C-K> :Buffers<CR>
+" leader, r - Fuzzy Finder :Tags
+nnoremap <leader>r :Tags<CR>
+
+
+" leader / - toggle Commentary
+noremap <leader>/ :Commentary<cr>
+
+" F6 - toggle NERDTree
 nmap <F6> :NERDTreeToggle<CR>
 
-" use F8 to toggle TagBar
+" F8 - toggle TagBar
 nmap <F8> :TagbarToggle<CR>
 

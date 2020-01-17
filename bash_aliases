@@ -265,6 +265,22 @@ alias taw='taskpriorityaddnowait '
 ### GIT (version control)
 ####ZZ008Z##########################
 
+# short forms
+# ===========
+# gs - git status
+alias gs='git status'
+# gb - git branch
+alias gb='git branch'
+# gp - git push
+alias gp='git push'
+# ga - git add
+alias ga='git add '
+
+# gaa - git add all
+alias gaa='git add .'
+# com - git commit with  msg
+alias com='git commit -m '
+
 
 #git commit/push
 gitcommitpush() {
@@ -279,3 +295,7 @@ alias push='gitcommitpush '
 
 # pull ff only
 alias pull='echo "git pull --ff-only"; git pull --ff-only'
+
+# co - checkout with fuzzy branch finder
+#       fzf with 15 lines below
+alias co='git checkout $(git branch | fzf -d 15)'
