@@ -5,6 +5,8 @@
 " # ===============================================================
 
 
+" INSTALL PLUGINS
+" ===============
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -26,36 +28,26 @@ call plug#end()
 
 " Run :PlugInstall to install plugins
 
-"split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" SETTINGS
+" ========
+
+" true color
+" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+
+" Color scheme.
+color desert
 
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
 
-" Enable folding with the spacebar
-nnoremap <space> za
-
-" See docstrings for folded code
-let g:SimpylFold_docstring_preview=1
-
 " encoding
 set encoding=utf-8
-
-" autocomplete. 
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " highlight
 let python_highlight_all=1
 syntax on
-
-"ignore pyc
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
 
 " Various settings from an example vimrc
 set history=500		" keep 50 lines of command line history
@@ -75,11 +67,46 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" Clipboard always go to system clipboard?
+set clipboard+=unnamedplus
 
+" PLUGINS
+" =======
 
-" true color
-" let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set termguicolors
+" SimplyFold
+" See docstrings for folded code
+let g:SimpylFold_docstring_preview=1
 
-" Color scheme.
-color desert
+" YouCompleteMe
+" autocomplete. 
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" NERDTree
+"ignore pyc
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" SHORTCUTS
+" =========
+" map leader key
+let mapleader = " "
+
+" Quicky (ev) edit vimrc or (sv) source
+nnoremap <leader>ev :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+" window split navigations. Ctrl+W, {J,K,L,H}
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" use F6 to toggle NERDTree
+nmap <F6> :NERDTreeToggle<CR>
+
+" use F8 to toggle TagBar
+nmap <F8> :TagbarToggle<CR>
+
