@@ -1,6 +1,8 @@
 # Git ignore file for user.
 # https://stackoverflow.com/a/4824199
-# ln -sf gitignore_user ~/.gitignore
+# for really user specific stuff, like vim configs put here.
+# other project related stuff go into each proj dir
+# ln -sf ~/dotfiles/gitignore_user ~/.gitignore
 # git config --global core.excludesfile ~/.gitignore
 
 # ignore vim files
@@ -25,3 +27,7 @@ tags
 
 # Persistent undo
 [._]*.un~
+
+# patch created .orig and .rej files
+# [._]*.orig
+# [._]*.rej

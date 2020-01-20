@@ -12,21 +12,41 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 
-Plug 'kien/ctrlp.vim'
-Plug 'majutsushi/tagbar'
-Plug 'Valloric/YouCompleteMe'
-Plug 'tmhedberg/SimpylFold'
-Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'nvie/vim-flake8'
-Plug 'jnurmine/Zenburn'
-Plug 'scrooloose/nerdtree'
-" Commentary - Toggle comments
-Plug 'tpope/vim-commentary'
 " Fuzzy Finder (fzf). #requires seperate install.
 Plug '~/.fzf'
 " Fuzzy Finder vim support
 Plug 'junegunn/fzf.vim'
+" ctrlp - fuzzy file, buffer, mru, tag.. finder
+Plug 'ctrlpvim/ctrlp.vim'
+" YouCompleteMe - code completion engine
+Plug 'Valloric/YouCompleteMe'
+" NERDTree - file explorer
+Plug 'scrooloose/nerdtree'
+" tagbar - class outline viewer
+Plug 'majutsushi/tagbar'
+" Commentary - Toggle comments
+Plug 'tpope/vim-commentary'
+" Surround - surround objects with brackets, quotes, tags, etc...
+Plug 'tpope/vim-surround'
+" Repeat - support '.' repeat on other tim pope plugins.
+Plug 'tpope/vim-repeat'
+" indentLine - draw lines at indent.  
+"   https://vi.stackexchange.com/questions/666/how-to-add-indentation-guides-lines
+Plug 'Yggdroot/indentLine'
+" SimplyFold - python smart folding
+Plug 'tmhedberg/SimpylFold'
+" syntastic - python syntax checker
+Plug 'vim-syntastic/syntastic'
+" black - python black syntax formatter
+Plug 'psf/black'
+
+" #indentpython - help indents, should be somewhat smarter with open brackets
+" #Plug 'vim-scripts/indentpython.vim'
+" #flake8 - python static syntax and style checker. #requires seperate install
+" #Plug 'nvie/vim-flake8'
+" #Zenburn - color scheme
+" #Plug 'jnurmine/Zenburn'
+
 
 " Initialize plugin system
 call plug#end()
@@ -40,12 +60,16 @@ call plug#end()
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 
+" Case insensitive searching
+set ignorecase
+" set smartcase   " switch to case sensitive if capitals used
+
 " Color scheme.
 color desert
 
 " Enable folding
-set foldmethod=indent
-set foldlevel=99
+" set foldmethod=indent
+" set foldlevel=99
 
 " encoding
 set encoding=utf-8
@@ -60,10 +84,11 @@ set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
 set number			" show line numbers
-
-set expandtab		" Old setting from mxn, probably for python to use spaces instead of tabs
-set tabstop=4		" Same as above^^
-set shiftwidth=4	" ^^
+" Expand tabs to 4 spaces
+" https://stackoverflow.com/questions/1878974/redefine-tab-as-4-spaces
+set expandtab		" expand tabs to space
+set tabstop=4		" width of TAB set to 4. still a t
+set shiftwidth=4	" indents width of 4
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -78,6 +103,10 @@ set clipboard+=unnamedplus
 " PLUGINS
 " =======
 
+" Black
+" run on save
+autocmd BufWritePre *.py execute ':Black'
+
 " SimplyFold
 " See docstrings for folded code
 let g:SimpylFold_docstring_preview=1
@@ -90,6 +119,13 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " NERDTree
 "ignore pyc
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" Syntastic
+" change from py2 to py3
+"   https://stackoverflow.com/a/51522537
+"   very simple, but not flexible.
+let g:syntastic_python_python_exec = 'python3'
+let g:syntastic_python_checkers = ['python']
 
 " SHORTCUTS
 " =========
