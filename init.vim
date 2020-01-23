@@ -16,8 +16,6 @@ call plug#begin('~/.vim/plugged')
 Plug '~/.fzf'
 " Fuzzy Finder vim support
 Plug 'junegunn/fzf.vim'
-" ctrlp - fuzzy file, buffer, mru, tag.. finder
-Plug 'ctrlpvim/ctrlp.vim'
 " YouCompleteMe - code completion engine
 Plug 'Valloric/YouCompleteMe'
 " NERDTree - file explorer
@@ -40,6 +38,8 @@ Plug 'vim-syntastic/syntastic'
 " black - python black syntax formatter
 Plug 'psf/black'
 
+" #ctrlp - fuzzy file, buffer, mru, tag.. finder
+" #Plug 'ctrlpvim/ctrlp.vim'
 " #indentpython - help indents, should be somewhat smarter with open brackets
 " #Plug 'vim-scripts/indentpython.vim'
 " #flake8 - python static syntax and style checker. #requires seperate install
