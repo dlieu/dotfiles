@@ -170,7 +170,9 @@ alias ....='cd ..; cd ..; cd ..'
 alias delme='cd ~/tmp/deleteme'
 
 #Common Project directories
-
+alias sandbox='cd ~/sandbox'
+alias dotfiles='cd ~/dotfiles'
+alias notes='cd ~/notes'
 
 ####################################
 ### SSH stuff
@@ -212,7 +214,8 @@ alias bl5='bzr log -l5'
 
 alias p='python'
 alias pl='pylint -E'
-alias v='vim'
+alias v='nvim'
+alias vim='nvim'
 alias g='grep'
 
 
