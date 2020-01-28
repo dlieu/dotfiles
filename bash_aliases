@@ -138,6 +138,15 @@ export PS1="${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
 # https://apple.stackexchange.com/questions/88515/how-do-i-edit-current-shell-command-in-vi
 set -o vi
 # set -o emacs
+
+
+
+# pyenv setup.
+function loadpyenv {
+    export PATH="$HOME/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+}
 ####################################
 ### Common Commands
 ###ZZ001Z############################
