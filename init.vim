@@ -105,7 +105,7 @@ set clipboard+=unnamedplus
 
 " Black
 " run on save
-autocmd BufWritePre *.py execute ':Black'
+" autocmd BufWritePre *.py execute ':Black'
 
 " SimplyFold
 " See docstrings for folded code
