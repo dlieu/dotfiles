@@ -4,10 +4,10 @@
 # https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
 
 [user]
-	email = 
-	name = dl
+    email =
+    name = dl
 [init]
-	templatedir = ~/.git_template
+    templatedir = ~/.git_template
 [alias]
     #basic shortforms
     co = checkout
@@ -15,20 +15,20 @@
     ci = commit
     st = status
 
-	# override default log. Fancier log, one line per commit
-	log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+    # override default log. Fancier log, one line per commit
+    log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
     # ctags - manually generate tags
-	ctags = !.git/hooks/ctags
+    ctags = !.git/hooks/ctags
 
-	# undo last commit
-	#       https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
-	undo = reset --soft HEAD^
+    # undo last commit
+    #       https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
+    undo = reset --soft HEAD^
 
     # show last log
     last = log -1 HEAD
 
 [core]
-	excludesfile = /home/dl/.gitignore
+    excludesfile = /home/dl/.gitignore
 
 
