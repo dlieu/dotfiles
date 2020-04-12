@@ -3,8 +3,8 @@
 # Purpose:              Setup file for program "(GNU) screen"
 # Compiled by:          David Lieu
 # ===============================================================
-# 
-# Change Log:         
+#
+# Change Log:
 #           April 12, 2019 - table of contents. a lot more sections. etc..
 #           January 19, 2018 - Initial version
 #
@@ -12,6 +12,7 @@
 ####################################
 ### Table of Contents
 ####################################
+# ZZ000Z.....................Basics/Configs
 # ZZ001Z.....................Common Commands
 # ZZ002Z.....................Directories
 # ZZ003Z.....................SSH stuff
@@ -20,125 +21,14 @@
 # ZZ006Z.....................ANSIBLE PLAYBOOKS
 # ZZ007Z.....................taskwarrior
 # ZZ008Z.....................GIT (version control)
+# ZZ009Z.....................Customer VPNs
+# ZZ010Z.....................Work Specific
+# ZZ011Z.....................Bash Prompt
 
 ####################################
 ### not organized..
 ####################################
 #https://medium.com/@tzhenghao/a-guide-to-building-a-great-bashrc-23c52e466b1c
-
-
-
-RED='\033[0;31m'
-NC='\033[0m' # No Color
-
-
-
-alias venv='source ~/main/virtualenv/myvenv/bin/activate'
-
-
-
-alias crl='crontab -l'
-# access the error log of a remote server
-crontabgrep() {
-    echo "crontab -l | grep $1"
-    crontab -l | grep "$1"
-}
-alias crg='crontabgrep '
-
-
-
-alias pse='ps -ef'
-# access the error log of a remote server
-psefgrep() {
-    echo "ps -ef | grep $1"
-    ps -ef | grep $1
-}
-alias pseg='psefgrep '
-
-
-
-printqueryoneline() {
-    TMP2=$(psql office --quiet --tuples-only -c "\timing off" -c "$1")
-    printf "$1\t\t→$TMP2\n"
-}
-alias printq='printqueryoneline '
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-
-
-#xxx git branch name on prompt
-#https://gist.github.com/mkottman/1936195
-# A two-line colored Bash prompt (PS1) with Git branch and a line decoration
-# which adjusts automatically to the width of the terminal.
-# Recognizes and shows Git, SVN and Fossil branch/revision.
-# Screenshot: http://img194.imageshack.us/img194/2154/twolineprompt.png
-# Michal Kottman, 2012
- 
-
-RESET="\[\033[0m\]"
-RED="\[\033[0;31m\]"
-GREEN="\[\033[01;32m\]"
-BLUE="\[\033[01;34m\]"
-YELLOW="\[\033[0;33m\]"
-
-#LINE_DASHES_FILLER=`printf -- '- %.0s' {1..200}`
-EMPTY_SPACE_FILLER=`printf -- '  %.0s' {1..200}`
-PS_LINE=$EMPTY_SPACE_FILLER
-
-function get_cached_bzr_tags {
-  TMP="$(grep $(pwd) /home/dl/tmp/bzrtags.txt)"
-  if [ -z "$TMP" ]
-  then
-  TMP="$(pwd) $(get_latest_bzr_tag)"
-  echo $TMP >> /home/dl/tmp/bzrtags.txt
-    echo $TMP | awk '{print $2}'
-  else
-    echo $TMP | awk '{print $2}'
-  fi
-}
-function get_latest_bzr_tag {
-  bzr tags --sort=time | tail -n1 | cut -d ' ' -f1
-}
-function get_latest_git_tag {
-  # eg. git describe --tag -> v8.0.6-60-g88effa665 
-  # returns v8.0.6
-  git describe --tags 2> /dev/null | cut -d '-' -f1
-}
-function parse_git_branch {
-  PS_BRANCH=''
-  PS_FILL=${PS_LINE:0:$COLUMNS}
-  if [ -d .svn ]; then
-    PS_BRANCH="(svn r$(svn info|awk '/Revision/{print $2}'))"
-    return
-  elif [ -d ".bzr/branch" ]; then
-    PS_BRANCH="($(get_cached_bzr_tags) r$(bzr revno)) "
-    return
-  fi
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  PS_UPSTREAM=$(git rev-parse --abbrev-ref ${ref#refs/heads/}@{u} 2> /dev/null)
-  PS_TAG=$(get_latest_git_tag)
-  PS_BRANCH="(${ref#refs/heads/} $PS_TAG) [$PS_UPSTREAM]"
-}
-function refresh_bzr_tags {
-  sed -i "\:$(pwd):d" /home/dl/tmp/bzrtags.txt
-  get_cached_bzr_tags
-}
-
-PROMPT_COMMAND=parse_git_branch
-PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
-PS_GIT="$YELLOW\$PS_BRANCH"
-PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
-#export PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}${RESET}\$ "
-#export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
-export PS1="${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
-##
-
-# change it to vim mode.
-# https://apple.stackexchange.com/questions/88515/how-do-i-edit-current-shell-command-in-vi
-set -o vi
-# set -o emacs
-
 
 
 # pyenv setup.
@@ -147,6 +37,22 @@ function loadpyenv {
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 }
+
+####################################
+### Basics/Configs
+###ZZ000Z############################
+#Colors vars for bash
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+# change it to vim mode.
+# https://apple.stackexchange.com/questions/88515/how-do-i-edit-current-shell-command-in-vi
+set -o vi
+# set -o emacs
+
 ####################################
 ### Common Commands
 ###ZZ001Z############################
@@ -156,7 +62,7 @@ alias dh='cat ~/.bash_aliases'
 alias halp='cat ~/.bash_aliases'
 
 
-#open default program 
+#open default program
 alias o=gnome-open  #gnome-open is ubuntu specific
 alias open=o
 
@@ -168,6 +74,32 @@ alias tf='tail -F '
 
 alias sr='screen -R ssh'
 
+#crontab
+alias crl='crontab -l'
+# access the error log of a remote server
+crontabgrep() {
+    echo "crontab -l | grep $1"
+    crontab -l | grep "$1"
+}
+alias crg='crontabgrep '
+
+#activate virtual env (python)
+alias venv='source ~/main/virtualenv/myvenv/bin/activate'
+
+#ps shortcuts
+alias pse='ps -ef'
+psefgrep() {
+    echo "ps -ef | grep $1"
+    ps -ef | grep $1
+}
+alias pseg='psefgrep '
+
+#Print query one line.
+printqueryoneline() {
+    TMP2=$(psql office --quiet --tuples-only -c "\timing off" -c "$1")
+    printf "$1\t\t→$TMP2\n"
+}
+alias printq='printqueryoneline '
 ####################################
 ### Directories
 ####ZZ002Z###########################
@@ -311,3 +243,99 @@ alias pull='echo "git pull --ff-only"; git pull --ff-only'
 # co - checkout with fuzzy branch finder
 #       fzf with 15 lines below
 alias co='git checkout $(git branch | fzf -d 15)'
+
+####################################
+### Customer VPNs
+####ZZ009Z##########################
+
+
+####################################
+### Work Specific
+####ZZ010Z##########################
+
+
+####################################
+### Bash Prompt
+####ZZ011Z##########################
+
+#xxx git branch name on prompt
+#https://askubuntu.com/a/946716
+### Show git branch name
+##force_color_prompt=yes
+##color_prompt=yes
+##parse_git_branch() {
+## git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+##}
+##if [ "$color_prompt" = yes ]; then
+## PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[01;31m\]$(parse_git_b##ranch)\[\033[00m\]\$ '
+##else
+## PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(parse_git_branch)\$ '
+##fi
+##unset color_prompt force_color_prompt
+
+#https://gist.github.com/mkottman/1936195
+# A two-line colored Bash prompt (PS1) with Git branch and a line decoration
+# which adjusts automatically to the width of the terminal.
+# Recognizes and shows Git, SVN and Fossil branch/revision.
+# Screenshot: http://img194.imageshack.us/img194/2154/twolineprompt.png
+# Michal Kottman, 2012
+
+RESET="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[01;32m\]"
+BLUE="\[\033[01;34m\]"
+YELLOW="\[\033[0;33m\]"
+
+#LINE_DASHES_FILLER=`printf -- '- %.0s' {1..200}`
+EMPTY_SPACE_FILLER=`printf -- '  %.0s' {1..200}`
+PS_LINE=$EMPTY_SPACE_FILLER
+
+
+function get_cached_bzr_tags {
+  TMP="$(grep $(pwd) /home/dl/tmp/bzrtags.txt)"
+  if [ -z "$TMP" ]
+  then
+  TMP="$(pwd) $(get_latest_bzr_tag)"
+  echo $TMP >> /home/dl/tmp/bzrtags.txt
+    echo $TMP | awk '{print $2}'
+  else
+    echo $TMP | awk '{print $2}'
+  fi
+}
+function get_latest_bzr_tag {
+  bzr tags --sort=time | tail -n1 | cut -d ' ' -f1
+}
+function get_latest_git_tag {
+  # eg. git describe --tag -> v8.0.6-60-g88effa665
+  # returns v8.0.6
+  git describe --tags 2> /dev/null | cut -d '-' -f1
+}
+
+function parse_git_branch {
+  PS_BRANCH=''
+  PS_FILL=${PS_LINE:0:$COLUMNS}
+  if [ -d .svn ]; then
+    PS_BRANCH="(svn r$(svn info|awk '/Revision/{print $2}'))"
+    return
+  elif [ -d ".bzr/branch" ]; then
+    PS_BRANCH="($(get_cached_bzr_tags) r$(bzr revno)) "
+    return
+  fi
+  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+  PS_UPSTREAM=$(git rev-parse --abbrev-ref ${ref#refs/heads/}@{u} 2>/dev/null)
+  PS_TAG=$(get_latest_git_tag)
+  PS_BRANCH="(${ref#refs/heads/} $PS_TAG) [$PS_UPSTREAM]"
+}
+function refresh_bzr_tags {
+  sed -i "\:$(pwd):d" /home/dl/tmp/bzrtags.txt
+  get_cached_bzr_tags
+}
+
+PROMPT_COMMAND=parse_git_branch
+PS_INFO="$GREEN\u@\h$RESET:$BLUE\w"
+PS_GIT="$YELLOW\$PS_BRANCH"
+PS_TIME="\[\033[\$((COLUMNS-10))G\] $RED[\t]"
+#export PS1="\[\033[0G\]${PS_INFO} ${PS_GIT}${RESET}\$ "
+#export PS1="\${PS_FILL}\[\033[0G\]${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+export PS1="${PS_INFO} ${PS_GIT}${PS_TIME}\n${RESET}\$ "
+##
