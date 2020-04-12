@@ -76,7 +76,6 @@ alias sr='screen -R ssh'
 
 #crontab
 alias crl='crontab -l'
-# access the error log of a remote server
 crontabgrep() {
     echo "crontab -l | grep $1"
     crontab -l | grep "$1"
@@ -189,11 +188,6 @@ taskgrep() {
     task all | grep $1
 }
 
-taskgrep() {
-    echo "task all | grep $1"
-    task all | grep $1
-}
-
 
 alias t='task '
 alias tg='taskgrep '
@@ -217,24 +211,28 @@ alias gs='git status'
 alias gb='git branch'
 # gp - git push
 alias gp='git push'
+# push - git push
+alias push='git push'
 # ga - git add
 alias ga='git add '
+# co - git checkout
+alias co='git checkout '
 
 # gaa - git add all
 alias gaa='git add .'
 # com - git commit with  msg
 alias com='git commit -m '
 
-
-#git commit/push
-gitcommitpush() {
-    echo "git add .; git commit -m '$1'; git push"
+#git add/commit/push
+gitaddcommitpush() {
     git status
     git add .
     git commit -m "$1"
     git push
+    echo "RAN: git add .; git commit -m '$1'; git push"
 }
-alias push='gitcommitpush '
+# gcp - git add commit push
+alias gcp='gitaddcommitpush '
 
 
 # pull ff only
@@ -242,7 +240,21 @@ alias pull='echo "git pull --ff-only"; git pull --ff-only'
 
 # co - checkout with fuzzy branch finder
 #       fzf with 15 lines below
-alias co='git checkout $(git branch | fzf -d 15)'
+#       cut beginning .. currently selected line has a '*'
+alias fco='git checkout $(git branch | fzf -d 15 | cut -c 2- )'
+
+# log for diffs
+gitprettylog() {
+    echo "git log --name-status -1 -U $1"
+    git log --name-status -1 -U  $1
+}
+alias glog='gitprettylog '
+
+# get latest version
+latest_cx_version() {
+    git -C /home/dl/counterstryx log $1 -n 1 --pretty=format:'%h'
+}
+
 
 ####################################
 ### Customer VPNs

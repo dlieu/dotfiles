@@ -8,6 +8,7 @@
 ####################################
 ### Table of Contents
 ####################################
+# ZZ000Z.....................Basics/Configs
 # ZZ001Z.....................Common Commands
 # ZZ002Z.....................Directories
 # ZZ003Z.....................SSH stuff
@@ -16,6 +17,9 @@
 # ZZ006Z.....................ANSIBLE PLAYBOOKS
 # ZZ007Z.....................taskwarrior
 # ZZ008Z.....................GIT (version control)
+# ZZ009Z.....................Customer VPNs
+# ZZ010Z.....................Work Specific
+# ZZ011Z.....................Bash Prompt
 
 ####################################
 ### not organized..
@@ -24,30 +28,20 @@
 
 
 
+####################################
+### Basics/Configs
+###ZZ000Z############################
+#Colors vars for bash
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-
-
-alias pse='ps -ef'
-# access the error log of a remote server
-psefgrep() {
-    echo "ps -ef | grep $1"
-    ps -ef | grep $1
-}
-alias pseg='psefgrep '
-
-
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
-
 
 # change it to vim mode.
 # https://apple.stackexchange.com/questions/88515/how-do-i-edit-current-shell-command-in-vi
 set -o vi
 # set -o emacs
-
 
 ####################################
 ### Common Commands
@@ -62,6 +56,15 @@ alias lt='ls -thor'
 alias bashrc='source ~/.bashrc'
 
 alias tf='tail -F '
+
+#ps shortcuts
+alias pse='ps -ef'
+psefgrep() {
+    echo "ps -ef | grep $1"
+    ps -ef | grep $1
+}
+alias pseg='psefgrep '
+
 
 ####################################
 ### Directories
@@ -93,9 +96,7 @@ alias notes='cd ~/notes'
 ####ZZ005Z##########################
 
 alias p='python'
-#alias pl='pylint -E'
 alias v='vim'
-
 alias g='grep'
 
 
@@ -110,7 +111,6 @@ alias g='grep'
 ####ZZ007Z##########################
 
 
-
 ####################################
 ### GIT (version control)
 ####ZZ008Z##########################
@@ -123,24 +123,28 @@ alias gs='git status'
 alias gb='git branch'
 # gp - git push
 alias gp='git push'
+# push - git push
+alias push='git push'
 # ga - git add
 alias ga='git add '
+# co - git checkout
+alias co='git checkout '
 
 # gaa - git add all
 alias gaa='git add .'
 # com - git commit with  msg
 alias com='git commit -m '
 
-
-#git commit/push
-gitcommitpush() {
-    echo "git add .; git commit -m '$1'; git push"
+#git add/commit/push
+gitaddcommitpush() {
     git status
     git add .
     git commit -m "$1"
     git push
+    echo "RAN: git add .; git commit -m '$1'; git push"
 }
-alias push='gitcommitpush '
+# gcp - git add commit push
+alias gcp='gitaddcommitpush '
 
 
 # pull ff only
@@ -148,4 +152,28 @@ alias pull='echo "git pull --ff-only"; git pull --ff-only'
 
 # co - checkout with fuzzy branch finder
 #       fzf with 15 lines below
-alias co='git checkout $(git branch | fzf -d 15)'
+#       cut beginning .. currently selected line has a '*'
+alias fco='git checkout $(git branch | fzf -d 15 | cut -c 2- )'
+
+# log for diffs
+gitprettylog() {
+    echo "git log --name-status -1 -U $1"
+    git log --name-status -1 -U  $1
+}
+alias glog='gitprettylog '
+
+
+
+####################################
+### Customer VPNs
+####ZZ009Z##########################
+
+
+####################################
+### Work Specific
+####ZZ010Z##########################
+
+
+####################################
+### Bash Prompt
+####ZZ011Z##########################
