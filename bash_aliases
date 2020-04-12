@@ -250,11 +250,6 @@ gitprettylog() {
 }
 alias glog='gitprettylog '
 
-# get latest version
-latest_cx_version() {
-    git -C /home/dl/counterstryx log $1 -n 1 --pretty=format:'%h'
-}
-
 
 ####################################
 ### Customer VPNs
