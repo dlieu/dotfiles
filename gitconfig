@@ -1,9 +1,20 @@
+
+# three levels: system, global, local
+# this file is global.  points to ~/.gitconfig
+# https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+
 [user]
 	email = 
 	name = dl
 [init]
 	templatedir = ~/.git_template
 [alias]
+    #basic shortforms
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+
 	# override default log. Fancier log, one line per commit
 	log = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
@@ -13,6 +24,10 @@
 	# undo last commit
 	#       https://git-scm.com/docs/git-reset#git-reset-emgitresetemltmodegtltcommitgt
 	undo = reset --soft HEAD^
+
+    # show last log
+    last = log -1 HEAD
+
 [core]
 	excludesfile = /home/dl/.gitignore
 
