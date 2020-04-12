@@ -30,6 +30,16 @@
 ####################################
 #https://medium.com/@tzhenghao/a-guide-to-building-a-great-bashrc-23c52e466b1c
 
+#git refresh - all common projects
+gitrefresh() {
+    TMP=sandbox;               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
+    TMP=dotfiles;              echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
+    TMP=notes;                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
+
+}
+alias gr='gitrefresh'
+
+
 
 # pyenv setup.
 function loadpyenv {
@@ -41,9 +51,15 @@ function loadpyenv {
 ####################################
 ### Basics/Configs
 ###ZZ000Z############################
-#Colors vars for bash
-RED='\033[0;31m'
-NC='\033[0m' # No Color
+#Colors vars for bash.. for echo?
+RED1='\033[0;31m'
+NC1='\033[0m' # No Color
+# Colors for... prompts?
+RESET="\[\033[0m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[01;32m\]"
+BLUE="\[\033[01;34m\]"
+YELLOW="\[\033[0;33m\]"
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
