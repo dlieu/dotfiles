@@ -32,9 +32,9 @@
 
 #git refresh - all common projects
 gitrefresh() {
-    TMP=sandbox;               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
-    TMP=dotfiles;              echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
-    TMP=notes;                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && pull
+    TMP=sandbox;               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+    TMP=dotfiles;              echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+    TMP=notes;                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
 
 }
 alias gr='gitrefresh'
