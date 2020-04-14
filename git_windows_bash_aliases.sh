@@ -27,6 +27,16 @@
 #https://medium.com/@tzhenghao/a-guide-to-building-a-great-bashrc-23c52e466b1c
 
 
+#git refresh - all common projects
+gitrefresh() {
+    TMP="main/workspace/dl_sandbox";               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+    TMP="main/workspace/dotfiles";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+    TMP="main/workspace/dl_notes";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+
+}
+alias gr='gitrefresh'
+
+
 
 ####################################
 ### Basics/Configs
