@@ -62,6 +62,19 @@ alias dh='cat ~/.bash_aliases'
 alias halp='cat ~/.bash_aliases'
 
 
+#explore folder
+# https://stackoverflow.com/questions/38086185/how-to-check-if-a-program-is-run-in-bash-on-ubuntu-on-windows-and-not-just-plain
+explore() {
+    if  [ ! -z "$WSL_DISTRO_NAME" ]; then
+        echo "explorer.exe $1"
+        explorer.exe $1
+    else
+        echo "nautilus $1"
+        nautilus $1
+    fi
+}
+alias e='explore '
+
 alias lt='ls -thor'
 alias bashrc='source ~/.bashrc'
 
