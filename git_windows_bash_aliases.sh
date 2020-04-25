@@ -32,6 +32,7 @@ gitrefresh() {
     TMP="main/workspace/dl_sandbox";               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
     TMP="main/workspace/dotfiles";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
     TMP="main/workspace/dl_notes";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
+    TMP="main/workspace/leetcode";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git pull --ff-only
 
 }
 alias gr='gitrefresh'
