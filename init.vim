@@ -127,6 +127,19 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python']
 
+" FUNCTIONS
+" =========
+" trim white space
+" https://vi.stackexchange.com/a/456
+" ways to use.  :call TrimWhitespace()  or :TrimWhitespace  or  leader w
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+" noremap <Leader>w :call TrimWhitespace()<CR>
+
 " SHORTCUTS
 " =========
 " map leader key
@@ -169,3 +182,5 @@ nmap <F6> :NERDTreeToggle<CR>
 " F8 - toggle TagBar
 nmap <F8> :TagbarToggle<CR>
 
+" leader, w - trim white space
+noremap <leader>w :call TrimWhitespace()<CR>

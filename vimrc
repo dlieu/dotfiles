@@ -122,3 +122,14 @@ let Tlist_Compact_Format = 1
 
 " Color scheme.
 color desert
+
+" trim white space
+" https://vi.stackexchange.com/a/456
+" ways to use.  :call TrimWhitespace()  or :TrimWhitespace  or  leader w
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+command! TrimWhitespace call TrimWhitespace()
+noremap <Leader>w :call TrimWhitespace()<CR>
