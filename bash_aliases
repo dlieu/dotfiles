@@ -191,7 +191,8 @@ alias bl5='bzr log -l5'
 ### Program Aliases
 ####ZZ005Z##########################
 
-alias p='python'
+# alias p='python'
+alias p='python3'
 alias pl='pylint -E'
 alias v='nvim'
 alias vim='nvim'
