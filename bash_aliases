@@ -41,6 +41,15 @@ gitrefresh() {
 alias gr='gitrefresh'
 
 
+#git status all - all common projects
+gitstatusall() {
+    TMP=sandbox;               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP=dotfiles;              echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP=notes;                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP=leetcode;              echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+
+}
+alias grs='gitstatusall'
 
 # pyenv setup.
 function loadpyenv {
