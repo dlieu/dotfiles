@@ -31,3 +31,7 @@ tags
 # patch created .orig and .rej files
 # [._]*.orig
 # [._]*.rej
+#
+
+# sqllite db files
+*.sqlite3
