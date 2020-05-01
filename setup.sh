@@ -60,7 +60,13 @@ else
 	mv $HOME/.tmux.conf $HOME/archive/dotfiles/tmux.conf_$HOSTNAME_$(date +%Y%m%d)
 fi
 
-
+# Backup gitconfig
+if [ -L $HOME/.gitconfig ] && [ "$(readlink $HOME/.gitconfig)" = "$HOME/main/workspace/dotfiles/gitconfig" ];
+then
+    :
+else
+	mv $HOME/.gitconfig $HOME/archive/dotfiles/gitconfig_$HOSTNAME_$(date +%Y%m%d)
+fi
 
 
 # Alert .vim has more than one folder
@@ -120,7 +126,13 @@ else
 	ln -s $HOME/main/workspace/dotfiles/tmux.conf $HOME/.tmux.conf
 fi
 
-
+# gitconfig
+if [ -L $HOME/.gitconfig ] && [ "$(readlink $HOME/.gitconfig)" = "$HOME/main/workspace/dotfiles/gitconfig" ];
+then
+echo ".gitconfig sym link exists already"
+else
+    ln -s $HOME/main/workspace/dotfiles/gitconfig $HOME/.gitconfig
+fi
 
 ###
 # Vim - install Vundle
