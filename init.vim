@@ -37,6 +37,19 @@ Plug 'tmhedberg/SimpylFold'
 Plug 'vim-syntastic/syntastic'
 " black - python black syntax formatter
 Plug 'psf/black'
+" clever-f - changes default f,F,t,T movements
+Plug 'rhysd/clever-f.vim'
+" lion - align text around chosen char
+Plug 'tommcdo/vim-lion'
+
+" color schemas - moonfly
+Plug 'bluz71/vim-moonfly-colors'
+" color schemas - nightfly
+Plug 'bluz71/vim-nightfly-guicolors'
+" color schemas - one
+Plug 'rakr/vim-one'
+" tmux-navigator - navigate tmux and vim with same keys
+Plug 'christoomey/vim-tmux-navigator'
 
 " #ctrlp - fuzzy file, buffer, mru, tag.. finder
 " #Plug 'ctrlpvim/ctrlp.vim'
@@ -66,6 +79,7 @@ set ignorecase
 
 " Color scheme.
 color desert
+color one
 
 " Enable folding
 " set foldmethod=indent
@@ -127,6 +141,15 @@ let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 let g:syntastic_python_python_exec = 'python3'
 let g:syntastic_python_checkers = ['python']
 
+" clever-f
+" let g:clever_f_across_no_line = 1
+let g:clever_f_fix_key_direction = 1
+let g:clever_f_show_prompt = 1
+let g:clever_f_timeout_ms = 3000
+let g:clever_f_chars_match_any_signs = ';'
+
+" tmux-navigator
+let g:tmux_navigator_disable_when_zoomed = 1
 " FUNCTIONS
 " =========
 " trim white space
@@ -142,18 +165,31 @@ command! TrimWhitespace call TrimWhitespace()
 
 " SHORTCUTS
 " =========
-" map leader key
+" <Space> - leader key
 let mapleader = " "
+
+" lion
+" gl<character>
+" eg. visual select, then run gl=
+
+" clever-f 
+" f,F,t,T become repeatable.
+" restore behavior of ';' and ','
+map ; <Plug>(clever-f-repeat-forward)
+map , <Plug>(clever-f-repeat-back)
+
+" tmux-navigator
+" CTRL+{J,K,L,H} - vim window split navigations, AND tmux panes
 
 " leader sv or ev -  edit vimrc or source
 nnoremap <leader>ev :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Ctrl+{J,K,L,H} - window split navigations
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
+" nnoremap <C-J> <C-W><C-J>
+" nnoremap <C-K> <C-W><C-K>
+" nnoremap <C-L> <C-W><C-L>
+" nnoremap <C-H> <C-W><C-H>
 
 
 " xxspacebar - Enable folding 
@@ -168,7 +204,7 @@ inoremap <S-Down> <Esc>:m+<CR>
 " Ctrl+P - Fuzzy Finder :Files
 nnoremap <C-P> :Files<CR>
 " Ctrl+K - Fuzzy Finder :Buffers
-nnoremap <C-K> :Buffers<CR>
+" nnoremap <C-K> :Buffers<CR>
 " leader, r - Fuzzy Finder :Tags
 nnoremap <leader>r :Tags<CR>
 
@@ -178,6 +214,7 @@ noremap <leader>/ :Commentary<cr>
 
 " F6 - toggle NERDTree
 nmap <F6> :NERDTreeToggle<CR>
+
 
 " F8 - toggle TagBar
 nmap <F8> :TagbarToggle<CR>

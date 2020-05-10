@@ -58,6 +58,21 @@ function loadpyenv {
     eval "$(pyenv virtualenv-init -)"
 }
 
+# fzf and search.
+# https://github.com/junegunn/fzf#usage
+# https://medium.com/@sidneyliebrand/how-fzf-and-ripgrep-improved-my-workflow-61c7ca212861
+# # Setting fd as the default source for fzf
+# export FZF_DEFAULT_COMMAND='rg --files --hidden'
+# export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git'
+export FZF_DEFAULT_COMMAND='fd --type file --color=always'
+export FZF_DEFAULT_OPTS="--ansi"
+
+#To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+#
+export FZF_ALT_C_COMMAND="fd -t d . --color=always"
+
 ####################################
 ### Basics/Configs
 ###ZZ000Z############################
