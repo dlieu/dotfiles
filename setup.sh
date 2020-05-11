@@ -134,12 +134,3 @@ else
     ln -s $HOME/main/workspace/dotfiles/gitconfig $HOME/.gitconfig
 fi
 
-###
-# Vim - install Vundle
-###
-if [ ! -d $HOME/.vim/bundle/Vundle.vim ]
-then
-	echo "Setup Vim plugin manager (Vundle)..."
-	git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-fi
-
