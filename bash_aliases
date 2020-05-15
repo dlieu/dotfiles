@@ -73,6 +73,17 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 #
 export FZF_ALT_C_COMMAND="fd -t d . --color=always"
 
+#useful commands.
+useful() {
+  $(cat /home/dl/github_dl_sandbox/misc/useful_commands.txt | fzf)
+}
+# __fzf_useful_select__() {
+#   local cmd="${FZF_CTRL_T_COMMAND:-"command cat /home/dl/github_dl_sandbox/misc/useful_commands.txt"}"
+#   eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse $FZF_DEFAULT_OPTS $FZF_CTRL_T_OPTS" fzf
+# }
+# alias uf='$(__fzf_useful_select__)'
+alias uf='useful'
+
 ####################################
 ### Basics/Configs
 ###ZZ000Z############################
