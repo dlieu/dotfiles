@@ -41,16 +41,21 @@ Plug 'psf/black'
 Plug 'rhysd/clever-f.vim'
 " lion - align text around chosen char
 Plug 'tommcdo/vim-lion'
+" tmux-navigator - navigate tmux and vim with same keys
+Plug 'christoomey/vim-tmux-navigator'
+" notes/misc - plugin for notes and dependency
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
 
+
+" color schemes
+" -------------
 " color schemas - moonfly
 Plug 'bluz71/vim-moonfly-colors'
 " color schemas - nightfly
 Plug 'bluz71/vim-nightfly-guicolors'
 " color schemas - one
 Plug 'rakr/vim-one'
-" tmux-navigator - navigate tmux and vim with same keys
-Plug 'christoomey/vim-tmux-navigator'
-
 " #ctrlp - fuzzy file, buffer, mru, tag.. finder
 " #Plug 'ctrlpvim/ctrlp.vim'
 " #indentpython - help indents, should be somewhat smarter with open brackets
@@ -68,6 +73,9 @@ call plug#end()
 
 " SETTINGS
 " ========
+
+" vim-note plugin needs this
+filetype plugin on
 
 " true color
 " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -150,6 +158,14 @@ let g:clever_f_chars_match_any_signs = ';'
 
 " tmux-navigator
 let g:tmux_navigator_disable_when_zoomed = 1
+
+" vim-notes
+let g:notes_directories = ['~/github_dl_notes']
+let g:notes_suffix = '.md'
+let g:notes_title_sync = 'no'
+
+
+
 " FUNCTIONS
 " =========
 " trim white space
@@ -205,6 +221,7 @@ inoremap <S-Down> <Esc>:m+<CR>
 nnoremap <C-P> :Files<CR>
 " Ctrl+K - Fuzzy Finder :Buffers
 " nnoremap <C-K> :Buffers<CR>
+nnoremap <leader>b :Buffers<CR>
 " leader, r - Fuzzy Finder :Tags
 nnoremap <leader>r :Tags<CR>
 
