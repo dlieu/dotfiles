@@ -56,6 +56,9 @@ Plug 'bluz71/vim-moonfly-colors'
 Plug 'bluz71/vim-nightfly-guicolors'
 " color schemas - one
 Plug 'rakr/vim-one'
+" color schemas - aurora
+Plug 'rafalbromirski/vim-aurora'
+
 " #ctrlp - fuzzy file, buffer, mru, tag.. finder
 " #Plug 'ctrlpvim/ctrlp.vim'
 " #indentpython - help indents, should be somewhat smarter with open brackets
