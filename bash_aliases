@@ -120,8 +120,12 @@ alias open=o
 
 #explore folder
 # https://stackoverflow.com/questions/38086185/how-to-check-if-a-program-is-run-in-bash-on-ubuntu-on-windows-and-not-just-plain
+# https://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
 explore() {
     if  [ ! -z "$WSL_DISTRO_NAME" ]; then
+        echo "explorer.exe $1"
+        explorer.exe $1
+    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
         echo "explorer.exe $1"
         explorer.exe $1
     else

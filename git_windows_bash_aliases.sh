@@ -38,6 +38,15 @@ gitrefresh() {
 alias gr='gitrefresh'
 
 
+#git status all - all common projects
+gitstatusall() {
+    TMP="main/workspace/dl_sandbox";               echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP="main/workspace/dotfiles";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP="main/workspace/dl_notes";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+    TMP="main/workspace/leetcode";                 echo -e "${RED1}Run: ${TMP}${NC1}"; cd ~/$TMP && git status
+
+}
+alias grs='gitstatusall'
 
 ####################################
 ### Basics/Configs
@@ -65,8 +74,12 @@ alias halp='cat ~/.bash_aliases'
 
 #explore folder
 # https://stackoverflow.com/questions/38086185/how-to-check-if-a-program-is-run-in-bash-on-ubuntu-on-windows-and-not-just-plain
+# https://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
 explore() {
     if  [ ! -z "$WSL_DISTRO_NAME" ]; then
+        echo "explorer.exe $1"
+        explorer.exe $1
+    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW64_NT" ]; then
         echo "explorer.exe $1"
         explorer.exe $1
     else
