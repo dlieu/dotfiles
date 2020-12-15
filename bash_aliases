@@ -288,7 +288,7 @@ alias ga='git add '
 # co - git checkout
 alias co='git checkout '
 # gl - git log
-alias co='git log '
+alias gl='git log '
 
 # gaa - git add all
 alias gaa='git add .'
