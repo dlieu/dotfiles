@@ -184,6 +184,9 @@ gitaddcommitpush() {
 alias gcp='gitaddcommitpush '
 
 
+alias gcpu='gitaddcommitpush "update" '
+
+
 # pull ff only
 alias pull='echo "git pull --ff-only"; git pull --ff-only'
 
