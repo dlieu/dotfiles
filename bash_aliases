@@ -182,6 +182,8 @@ alias delme='cd ~/tmp/deleteme'
 alias sandbox='cd ~/sandbox'
 alias dotfiles='cd ~/dotfiles'
 alias notes='cd ~/notes'
+alias gnotes='cd ~/notes'
+alias gbox='cd ~/main/workspace/dl_sandbox'
 
 ####################################
 ### SSH stuff

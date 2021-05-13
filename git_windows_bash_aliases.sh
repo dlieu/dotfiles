@@ -114,10 +114,11 @@ alias ....='cd ..; cd ..; cd ..'
 alias delme='cd ~/tmp/deleteme'
 
 #Common Project directories
-alias sandbox='cd ~/sandbox'
-alias dotfiles='cd ~/dotfiles'
+alias sandbox='cd ~/main/workspace/dl_sandbox'
+alias dotfiles='cd ~/main/workspace/dotfiles'
 alias notes='cd ~/notes'
-
+alias gnotes='cd ~/main/workspace/dl_notes'
+alias gbox='cd ~/main/workspace/dl_sandbox'
 ####################################
 ### SSH stuff
 ####ZZ003Z##########################
