@@ -68,6 +68,13 @@ else
 	mv $HOME/.gitconfig $HOME/archive/dotfiles/gitconfig_$HOSTNAME_$(date +%Y%m%d)
 fi
 
+# Backup zshrc
+if [ -L $HOME/.zshrc ] && [ "$(readlink $HOME/.zshrc)" = "$HOME/main/workspace/dotfiles/zshrc" ];
+then
+    :
+else
+	mv $HOME/.zshrc $HOME/archive/dotfiles/zshrc_$HOSTNAME_$(date +%Y%m%d)
+fi
 
 # Alert .vim has more than one folder
 
@@ -134,3 +141,10 @@ else
     ln -s $HOME/main/workspace/dotfiles/gitconfig $HOME/.gitconfig
 fi
 
+# zshrc
+if [ -L $HOME/.zshrc ] && [ "$(readlink $HOME/.zshrc)" = "$HOME/main/workspace/dotfiles/zshrc" ];
+then
+echo ".zshrc sym link exists already"
+else
+    ln -s $HOME/main/workspace/dotfiles/zshrc $HOME/.zshrc
+fi
