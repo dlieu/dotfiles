@@ -125,6 +125,10 @@ endif
 " Clipboard always go to system clipboard?
 set clipboard+=unnamedplus
 
+" fix neovim on mac. python3
+let g:python3_host_prog = '/Users/dl/main/virtualenv/neovim3/bin/python'
+
+
 " PLUGINS
 " =======
 
