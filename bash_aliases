@@ -75,7 +75,7 @@ export FZF_ALT_C_COMMAND="fd -t d . --color=always"
 
 #useful commands.
 useful() {
-  $(cat /home/dl/github_dl_sandbox/misc/useful_commands.txt | fzf)
+  $(cat ~/github_dl_sandbox/misc/useful_commands.txt | fzf)
 }
 # __fzf_useful_select__() {
 #   local cmd="${FZF_CTRL_T_COMMAND:-"command cat /home/dl/github_dl_sandbox/misc/useful_commands.txt"}"
@@ -83,6 +83,40 @@ useful() {
 # }
 # alias uf='$(__fzf_useful_select__)'
 alias uf='useful'
+
+
+# ip address. for mac its this weird ipconfig this
+# https://stackoverflow.com/questions/3466166/how-to-check-if-running-in-cygwin-mac-or-linux
+getos() {
+case "$(uname -s)" in
+
+   Darwin)
+     echo 'Mac OS X'
+     ;;
+
+   Linux)
+     echo 'Linux'
+     ;;
+
+   CYGWIN*|MINGW32*|MSYS*|MINGW*)
+     echo 'MS Windows'
+     ;;
+
+   # Add here more strings to compare
+   # See correspondence table at the bottom of this answer
+
+   *)
+     echo 'Other OS' 
+     ;;
+esac
+}
+
+if [[ "$(getos)" == "Mac OS X" ]]
+then
+    alias ip='ipconfig getifaddr en0  '
+else
+    alias ip='ip addr '
+fi
 
 ####################################
 ### Basics/Configs
@@ -136,7 +170,15 @@ explore() {
 alias e='explore '
 
 alias lt='ls -thor'
-alias bashrc='source ~/.bashrc'
+
+# source shell rc file. mac/linux
+if [[ "$(getos)" == "Mac OS X" ]]
+then
+    alias bashrc='source ~/.zshrc'
+    alias zshrc='source ~/.zshrc'
+else
+    alias bashrc='source ~/.bashrc'
+fi
 
 alias tf='tail -F '
 
