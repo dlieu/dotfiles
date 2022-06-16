@@ -11,6 +11,7 @@
 echo "Backup existing dot files (if required)..."
 mkdir -p ~/archive/dotfiles
 mkdir -p ~/.config/nvim/
+mkdir -p ~/.oci
 
 # Backup vimrc
 if [ -L $HOME/.vimrc ] && [ "$(readlink $HOME/.vimrc)" = "$HOME/main/workspace/dotfiles/.vimrc" ];
@@ -74,6 +75,14 @@ then
     :
 else
 	mv $HOME/.zshrc $HOME/archive/dotfiles/zshrc_$HOSTNAME_$(date +%Y%m%d)
+fi
+
+# Backup oci_cli_rc
+if [ -L $HOME/.oci/oci_cli_rc] && [ "$(readlink $HOME/.oci/oci_cli_rc)" = "$HOME/main/workspace/dotfiles/oci_cli_rc" ];
+then
+    :
+else
+	mv $HOME/.oci/oci_cli_rc $HOME/archive/dotfiles/oci_cli_rc_$HOSTNAME_$(date +%Y%m%d)
 fi
 
 # Alert .vim has more than one folder
@@ -147,4 +156,12 @@ then
 echo ".zshrc sym link exists already"
 else
     ln -s $HOME/main/workspace/dotfiles/zshrc $HOME/.zshrc
+fi
+
+# oci_cli_rc
+if [ -L $HOME/.oci/oci_cli_rc ] && [ "$(readlink $HOME/.oci/oci_cli_rc)" = "$HOME/main/workspace/dotfiles/oci_cli_rc" ];
+then
+echo "oci_cli_rc sym link exists already"
+else
+    ln -s $HOME/main/workspace/dotfiles/oci_cli_rc $HOME/.oci/oci_cli_rc
 fi
