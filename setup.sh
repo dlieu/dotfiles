@@ -78,7 +78,7 @@ else
 fi
 
 # Backup oci_cli_rc
-if [ -L $HOME/.oci/oci_cli_rc] && [ "$(readlink $HOME/.oci/oci_cli_rc)" = "$HOME/main/workspace/dotfiles/oci_cli_rc" ];
+if [ -L $HOME/.oci/oci_cli_rc ] && [ "$(readlink $HOME/.oci/oci_cli_rc)" = "$HOME/main/workspace/dotfiles/oci_cli_rc" ];
 then
     :
 else
