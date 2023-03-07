@@ -28,6 +28,9 @@
     # show last log
     last = log -1 HEAD
 
+    # Fancier log, one line per commit
+    glog = log -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
 [core]
 	excludesfile = /home/dl/.gitignore
 
