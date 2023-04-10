@@ -31,6 +31,9 @@
     # Fancier log, one line per commit
     glog = log -n20 --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 
+    #cherry pick log -- based off above, but easier to clean up for redmine.
+    cplog = log -n20 --graph --pretty=format:'%C(bold blue)<%an>%Creset %Cgreen(%cr) - * %Cred%h%Creset - %s  '
+
 [core]
 	excludesfile = /home/dl/.gitignore
 
